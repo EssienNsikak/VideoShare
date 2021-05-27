@@ -1,12 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './_categoriesBar.scss';
 
+const keywords = [
+  'All',
+  'React js',
+  'Angular js',
+  'React Native',
+  'use of API',
+  'Redux',
+  'Music',
+  'Algorithm Art ',
+  'Guitar',
+  'Bengali Songs',
+  'Coding',
+  'Cricket',
+  'Football',
+  'Real Madrid',
+  'Gatsby',
+  'Poor Coder',
+  'Aviation',
+  'Tourism',
+  'Live'
+]
+
 const CategoriesBar = () => {
-  return (
-    <div>
-      <h6>Categories Bar</h6>
-    </div>
-  )
+
+  const [activeElement, setActiveElement] = useState('All');
+
+  const handleClick = (value) => {
+    setActiveElement(value)
+  }
+
+  return <div className='categoriesBar'>
+    {
+      keywords.map((value, i) => (
+        <span 
+          onClick={() => handleClick(value)}
+          key={i}
+          className={activeElement === value ? 'active' : ''}
+        >
+          {value}
+        </span>
+      ))
+    }
+  </div>
 }
 
 export default CategoriesBar
