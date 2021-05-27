@@ -3,5 +3,15 @@ import React from 'react';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './_base.scss';
+import { Provider } from 'react-redux';
+import store from './redux/Store';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <App />       
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+);

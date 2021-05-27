@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import Header from './components/header/Header';
 import Sidebar from './components/sidebar/Sidebar';
 import HomeScreen from './screen/homeScreen/HomeScreen';
 import './_app.scss';
 import LoginScreen from './screen/loginScreen/LoginScreen';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const Layout = ({ children }) => {
@@ -34,7 +35,17 @@ const Layout = ({ children }) => {
 
 const App = () => {
 
-  return <Router>
+  const { accessToken, loading } = useSelector( state => state.auth )
+
+  const history = useHistory()
+
+  useEffect(() => {
+    if (!loading && !accessToken) {
+      history.push('/login')
+    }
+  }, [ accessToken, loading, history ])
+
+  return (
 
     <Switch>
 
@@ -59,9 +70,7 @@ const App = () => {
       </Route>
 
     </Switch>  
-
-  </Router>
-
+  )
 }
 
 export default App
