@@ -1,6 +1,12 @@
 import firebase from 'firebase/app';
 import auth from '../../firebase'
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOAD_PROFILE, LOGIN_FAIL } from '../actionType';
+import { 
+  LOGIN_REQUEST, 
+  LOGIN_SUCCESS, 
+  LOAD_PROFILE, 
+  LOGIN_FAIL, 
+  LOG_OUT
+} from '../actionType';
 
 export const login = (req, res) => async dispatch => {
   try {
@@ -36,4 +42,14 @@ export const login = (req, res) => async dispatch => {
       payload: err.message
     })
   }
-}
+};
+
+export const log_out = () => async dispatch => {
+  await auth.signOut()
+  dispatch({
+    type: LOG_OUT
+  })
+
+  sessionStorage.removeItem('videoshare-access-token')
+  sessionStorage.removeItem('videoshare-user')
+};
