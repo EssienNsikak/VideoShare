@@ -19,7 +19,7 @@ const Header = ({ handleToggleSidebar }) => {
         alt=''
         className='header__logo'
       />
-      <h3 className='header__text'><strong>VideoShare</strong></h3>
+      <h3 className='header__text'><b>VideoShare</b></h3>
 
       <form>
         <input type='text' placeholder='Search' />
