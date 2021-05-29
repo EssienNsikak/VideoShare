@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './_base.scss';
 import { Provider } from 'react-redux';
 import store from './redux/Store';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(

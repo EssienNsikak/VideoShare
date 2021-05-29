@@ -4,6 +4,7 @@ import { AiFillEye } from 'react-icons/ai';
 import request from '../../api';
 import moment from 'moment';
 import numeral from 'numeral';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 const Video = ({ video }) => {
@@ -59,11 +60,12 @@ const Video = ({ video }) => {
     <div className='video'>
 
       <div className='video__top'>
-        <img 
+        {/*<img 
           src={medium.url}
           alt='' 
-        />
-        <span>{_duration}</span>
+        />*/}
+        <LazyLoadImage src={medium.url} effect='blur' />
+        <span className='video__top__duration'>{_duration}</span>
       </div>
 
       <div className='video__title'>
@@ -83,10 +85,11 @@ const Video = ({ video }) => {
       </div>
 
       <div className='video__channel'>
-        <img 
+        {/*<img 
           src={channelIcon?.url} 
           alt='' 
-        />
+        />*/}
+        <LazyLoadImage src={channelIcon?.url}  effect='blur' />
         <p>{channelTitle}</p>
       </div>
     
