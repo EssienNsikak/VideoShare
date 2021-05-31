@@ -96,4 +96,4 @@ export const getVideoById = (id) => async (dispatch) => {
       payload: err.message
     })
   }
-}
+};
