@@ -5,19 +5,38 @@ import numeral from 'numeral';
 import { MdThumbUp, MdThumbDown } from 'react-icons/md';
 import ShowMoreText from 'react-show-more-text';
 import { useDispatch, useSelector } from 'react-redux';
-import { getChannelDetails } from '../redux/actions/channel.actions';
+import { getChannelDetails, checkSubscriptionStatus } from '../redux/actions/channel.actions';
 
 const VideoMetaData = ({ video: { snippet, statistics }, vidoe }) => {
 
-  const { channelTitle, channelId, description, title, publishedAt } = snippet;
-  const { viewCount, likeCount, dislikeCount } = statistics;
+  const { 
+    channelTitle, 
+    channelId, 
+    description, 
+    title, 
+    publishedAt 
+  } = snippet;
+
+  const { 
+    viewCount, 
+    likeCount, 
+    dislikeCount 
+  } = statistics;
 
   const dispatch = useDispatch();
 
-  const { snippet: channelSnippet, statistics: channelStatistics } = useSelector(state => state.channelDetails.channel)
+  const { 
+    snippet: channelSnippet, 
+    statistics: channelStatistics 
+  } = useSelector(state => state.channelDetails.channel)
+
+  const { subscriptionStatus } = useSelector(
+    state => state.channelDetails
+  )
 
   useEffect(() => {
     dispatch(getChannelDetails(channelId))
+    dispatch(checkSubscriptionStatus(channelId))
   }, [dispatch, channelId])
 
   return (
@@ -57,10 +76,21 @@ const VideoMetaData = ({ video: { snippet, statistics }, vidoe }) => {
           />
           <div className='d-flex flex-column'>
             <span>{channelTitle}</span>
-            <span>{numeral(channelStatistics?.subscriberCount).format('0.a')} Subscribers</span>
+            <span>
+              {' '}
+              {numeral(channelStatistics?.subscriberCount).format(
+                '0.a'
+              )}{' '} 
+              Subscribers
+            </span>
           </div>          
         </div>
-        <button className='btn border-0 p-2 m-2'>Subscribe</button>
+        <button
+          className={`p-2 m-2 border-0 btn ${
+            subscriptionStatus && 'btn-gray'
+          }`}>
+          {subscriptionStatus ? 'Subscribed' : 'Subscribe'}
+        </button>
       </div>
 
       <div className='videoMetaData__description'>
