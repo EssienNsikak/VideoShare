@@ -5,17 +5,21 @@ import numeral from 'numeral';
 import { MdThumbUp, MdThumbDown } from 'react-icons/md';
 import ShowMoreText from 'react-show-more-text'
 
-const VideoMetaData = () => {
+const VideoMetaData = ({ video: { snippet, statistics }, vidoe }) => {
+
+  const { channelTitle, channelId, description, title, publishedAt } = snippet;
+  const { viewCount, likeCount, dislikeCount } = statistics;
+
   return (
     <div className='videoMetaData py-2'>
 
       <div className='videoMetaData__top'>
-        <h5>Video Title</h5>
+        <h5>{title}</h5>
 
         <div className='d-flex justify-content-between align-items-center py-1'>
           <span>
-            {numeral(1000).format('0.a')} Views •
-            {moment('2021-05-30').fromNow()}
+            {numeral(viewCount).format('0.a')} Views •
+            {moment(publishedAt).fromNow()}
           </span>
         
 
@@ -23,11 +27,11 @@ const VideoMetaData = () => {
 
             <span className='mr-3'>
               <MdThumbUp size={26} />
-              {numeral(1000).format('0.a')}
+              {numeral(likeCount).format('0.a')}
             </span>
             <span className='mr-3'>
               <MdThumbDown size={26} />
-              {numeral(1000).format('0.a')}
+              {numeral(dislikeCount).format('0.a')}
             </span>
           
           </div>
@@ -42,8 +46,8 @@ const VideoMetaData = () => {
             alt='avatar' 
           />
           <div className='d-flex flex-column'>
-            <span>Geek Coders</span>
-            <span>{numeral(1000).format('0.a')} Subscribers</span>
+            <span>{channelTitle}</span>
+            <span>{numeral(100000).format('0.a')} Subscribers</span>
           </div>          
         </div>
         <button className='btn border-0 p-2 m-2'>Subscribe</button>
@@ -57,7 +61,7 @@ const VideoMetaData = () => {
           anchorClass='showMoreText'
           expanded={false}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a lorem neque. Proin malesuada, tortor sed bibendum luctus, lorem nisi imperdiet leo, eget facilisis metus nisi a libero. Vivamus et ligula eget erat molestie malesuada. Duis urna lectus, pellentesque ut leo sit amet, elementum pharetra urna. Quisque elementum sed est sed mattis. Quisque in lorem turpis. Integer ullamcorper tortor tellus, elementum aliquam tellus viverra vitae. Ut in neque nec diam hendrerit porttitor. Curabitur pellentesque maximus tellus, id hendrerit ligula. Etiam finibus quam a nunc tempus sollicitudin. Vivamus quis libero dictum, lacinia quam quis, lacinia purus. Quisque sed enim vitae arcu lacinia scelerisque sit amet eu libero. Nulla nec vehicula arcu. Aliquam sit amet diam augue.
+          {description}
         </ShowMoreText>
       </div>
 
