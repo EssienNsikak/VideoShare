@@ -7,6 +7,7 @@ import Comments from '../../components/comments/Comments';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVideoById, getRelatedVideos } from '../../redux/actions/videos.action';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 
 const WatchScreen = () => {
@@ -52,10 +53,16 @@ const WatchScreen = () => {
 
       <Col lg={4}>
         {
-          !loading && videos?.filter(video => video.snippet)
-          .map((video) => (
-            <VideoHorizontal video={video} key={video.id.videoId} />
-          ))
+          !loading ? 
+          videos
+            ?.filter(video => video.snippet)
+            .map((video) => (
+              <VideoHorizontal video={video} key={video.id.videoId} />
+            ))
+          :
+          <SkeletonTheme color='#343a40' highlightColor='#3c4147'>
+            <Skeleton width='100%' height='130px' count={15} />
+          </SkeletonTheme>
         }
       </Col>
 
