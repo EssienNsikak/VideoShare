@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './_comments.scss';
 import Comment from '../comment/Comment';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideoCommentById } from '../../redux/actions/comments.actions';
+import { getVideoCommentById, addComment } from '../../redux/actions/comments.actions';
 
-const Comments = ({ videoId }) => {
+const Comments = ({ videoId, totalComments }) => {
 
   const dispatch = useDispatch()
 
@@ -14,15 +14,20 @@ const Comments = ({ videoId }) => {
 
   const comments = useSelector(state => state.commentList.comments)
 
+  const [text, setText] = useState('')
+
   const _comments = comments?.map(comment => comment.snippet.topLevelComment.snippet)
 
-  const handleComment = () => {
-
+  const handleComment = (e) => {
+    e.preventDefault();
+    if (text.length === 0) return
+    dispatch(addComment(videoId, text))
+    setText('')
   }
 
   return (
     <div className='comments'>
-      <p>1234 Comments</p>
+      <p>{totalComments} Comments</p>
       <div className='comments__form d-flex w-100 my-2'>
         <img 
           className='rounded-circle mr-3' 
@@ -37,6 +42,8 @@ const Comments = ({ videoId }) => {
             type='text' 
             className='flex-grow-1' 
             placeholder='Add a public comment...' 
+            value={text}
+            onChange = { e => setText(e.target.value)}
           />
           <button className='border-0 p-2'>Comment</button>
         </form>
@@ -52,4 +59,4 @@ const Comments = ({ videoId }) => {
   )
 }
 
-export default Comments
+export default Comments;
