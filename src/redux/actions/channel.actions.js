@@ -23,7 +23,6 @@ export const getChannelDetails = (id) => async (dispatch) => {
       payload: data.items[0]
     })
   } catch (err) {
-    console.log(err.response.data)
     dispatch({
       type: CHANNEL_DETAILS_FAIL,
       payload: err.response.data
