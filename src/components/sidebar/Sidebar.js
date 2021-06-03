@@ -31,7 +31,7 @@ const Sidebar = ({ sidebar, handleToggleSidebar }) => {
         <span>Home</span>
       </li>
 
-      <Link to='/feed/subscriptions'>
+      <Link to='/feed/subscriptions' className='subscriptions'>
         <li>
           <MdSubscriptions size={23} />
           <span>Subscriptions</span>

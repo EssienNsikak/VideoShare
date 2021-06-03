@@ -50,6 +50,9 @@
    &.open {
       transform: translateX(0);
    }
+  .subscriptions {
+    text-decoration: none;
+  } 
 }
 
 @media (max-width: $breakpoint-medium) {

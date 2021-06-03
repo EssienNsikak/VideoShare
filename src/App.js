@@ -10,6 +10,7 @@ import SubscriptionsScreen from './screen/subscriptionsScreen/SubscriptionsScree
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import SearchScreen from './screen/SearchScreen';
+import ChannelScreen from './screen/channelScreen/ChannelScreen';
 
 const Layout = ({ children }) => {
 
@@ -81,7 +82,7 @@ const App = () => {
 
       <Route path='/channel/:channelId'>
         <Layout>
-          Channel screen
+          <ChannelScreen />
         </Layout>
       </Route>
 

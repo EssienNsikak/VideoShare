@@ -8,7 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useHistory } from 'react-router-dom';
 
 
-const Video = ({ video }) => {
+const Video = ({ video, channelScreen }) => {
 
   const { 
     id, 
@@ -18,7 +18,8 @@ const Video = ({ video }) => {
       title, 
       publishedAt, 
       thumbnails:{ medium } 
-    } 
+    },
+    contentDetails 
   } = video
 
   const [views, setViews] = useState(null);
@@ -28,7 +29,7 @@ const Video = ({ video }) => {
   const seconds = moment.duration(duration).asSeconds()
   const _duration = moment.utc(seconds * 1000).format('mm:ss')
 
-  const _videoId = id?.videoId || id;
+  const _videoId = id?.videoId || contentDetails?.videoId || id;
 
   const history = useHistory()
 
@@ -90,18 +91,16 @@ const Video = ({ video }) => {
         </span>
 
       </div>
-
-      <div className='video__channel'>
-        {/*<img 
-          src={channelIcon?.url} 
-          alt='' 
-        />*/}
-        <LazyLoadImage src={channelIcon?.url}  effect='blur' />
-        <p>{channelTitle}</p>
-      </div>
-    
-      </div>
+      {
+        channelScreen && (
+          <div className='video__channel'>
+              <LazyLoadImage src={channelIcon?.url}  effect='blur' />
+            <p>{channelTitle}</p>
+          </div>
+        )  
+      }
+    </div>
   )
 }
 
-export default Video
+export default Video;

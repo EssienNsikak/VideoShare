@@ -17,9 +17,9 @@ const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
       description, 
       title, 
       publishedAt, 
-      thumbnails: {medium}
+      thumbnails: {medium},
+      resourceId
     },
-    resourceId
   } = video;
 
   
