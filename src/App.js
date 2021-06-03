@@ -6,6 +6,7 @@ import HomeScreen from './screen/homeScreen/HomeScreen';
 import './_app.scss';
 import LoginScreen from './screen/loginScreen/LoginScreen';
 import WatchScreen from './screen/watchScreen/WatchScreen';
+import SubscriptionsScreen from './screen/subscriptionsScreen/SubscriptionsScreen';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import SearchScreen from './screen/SearchScreen';
@@ -69,6 +70,18 @@ const App = () => {
       <Route path='/watch/:id'>
         <Layout>
           <WatchScreen />
+        </Layout>
+      </Route>
+
+      <Route path='/feed/subscriptions'>
+        <Layout>
+          <SubscriptionsScreen />
+        </Layout>
+      </Route>
+
+      <Route path='/channel/:channelId'>
+        <Layout>
+          Channel screen
         </Layout>
       </Route>
 
