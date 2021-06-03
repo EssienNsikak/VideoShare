@@ -12,15 +12,15 @@ jobs:
       runs-on:ubuntu-latest
 
       steps:
-        - name: get the source code
+        - name : get the source code
           uses: actions/checkout@v2
 
-        - name: install node
+        - name : install node
           uses: actions/setup-node@v2
           with:
               node-version:'12'
 
-        - name: install node packages
+        - name : install node packages
           run: npm i
 
         - name: Build
@@ -28,7 +28,7 @@ jobs:
           env:
             CI: false
         
-        - name: Deploy to Firebase
+        - name : Deploy to Firebase
           uses: w9jds/firebase-action@master
           with:
             args: deploy --only hosting
