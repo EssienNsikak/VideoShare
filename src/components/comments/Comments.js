@@ -14,6 +14,8 @@ const Comments = ({ videoId, totalComments }) => {
 
   const comments = useSelector(state => state.commentList.comments)
 
+  const user = useSelector( state => state.auth?.user )
+
   const [text, setText] = useState('')
 
   const _comments = comments?.map(comment => comment.snippet.topLevelComment.snippet)
@@ -31,7 +33,7 @@ const Comments = ({ videoId, totalComments }) => {
       <div className='comments__form d-flex w-100 my-2'>
         <img 
           className='rounded-circle mr-3' 
-          src='https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png' 
+          src={user?.photoURL}
           alt='avatar' 
         />
         <form 

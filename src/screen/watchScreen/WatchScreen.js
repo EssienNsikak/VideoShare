@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVideoById, getRelatedVideos } from '../../redux/actions/videos.action';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { Helmet } from 'react-helmet'
 
 
 const WatchScreen = () => {
@@ -26,6 +27,11 @@ const WatchScreen = () => {
 
   return (
     <Row>
+      <Helmet>
+        <title>
+          {video?.snippet?.title}
+        </title>
+      </Helmet>
 
       <Col lg={8}>
         <div className='watchScreen__player'>
